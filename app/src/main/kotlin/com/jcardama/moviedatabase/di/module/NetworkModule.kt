@@ -71,4 +71,10 @@ class NetworkModule {
     fun providesGsonConverterFactory(): GsonConverterFactory {
         return GsonConverterFactory.create()
     }
+
+    @Singleton
+    @Provides
+    fun providesMovieService(retrofit: Retrofit): MovieService {
+        return retrofit.create(MovieService::class.java)
+    }
 }
