@@ -37,7 +37,7 @@ class DetailsFragment : BaseFragment() {
                 view.backdrop_image_view.loadFromUrl("${Config.BACKDROP_BASE_URL}${it.backdropPath}")
                 view.cover_image_view.loadFromUrl("${Config.POSTER_BASE_URL}${it.posterPath}")
                 view.title_text_view.text = it.title
-                view.release_date_text_view.text = "Release date: ${it.releaseDate}"
+                view.release_date_text_view.text = getString(R.string.hint_release_date, it.releaseDate)
                 view.score_text_view.text = it.voteAverage.toString()
                 view.progress_bar.progress = it.voteAverage?.toInt() ?: 0
                 view.overview_text_view.text = it.overview

@@ -15,6 +15,7 @@
 	<string name="title_movies">Movies</string>
 	<string name="title_favorite_movies">Favorite movies</string>
 	<string name="title_watch_list">Watch list</string>
+	<string name="title_overview">Overview</string>
 
 	<!-- Messages -->
 	<string name="message_no_movies">There are no movies at this moment</string>
@@ -24,5 +25,6 @@
 	<!-- Hints -->
 	<string name="hint_search">Search</string>
 	<string name="hint_score">User\nScore</string>
-	<string name="title_overview">Overview</string>
+	<string name="hint_release_date">Release date: %1$s</string>
+
 </resources>
