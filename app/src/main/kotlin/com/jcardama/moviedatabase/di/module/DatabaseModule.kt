@@ -18,4 +18,9 @@ class DatabaseModule {
                 .fallbackToDestructiveMigration()
                 .build()
     }
+
+    @Provides
+    fun provideMovieDao(appDataBase: AppDatabase): MovieDao {
+        return appDataBase.movieDao()
+    }
 }
