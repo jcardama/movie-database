@@ -3,33 +3,40 @@ package com.jcardama.moviedatabase.ui.movies
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.jcardama.moviedatabase.domain.model.Movie
-import com.jcardama.moviedatabase.domain.model.response.ErrorModel
 import com.jcardama.moviedatabase.domain.usecase.GetAllMoviesUseCase
 import com.jcardama.moviedatabase.domain.usecase.GetFavoriteMoviesUseCase
+import com.jcardama.moviedatabase.domain.usecase.GetWatchListMoviesUseCase
 import com.jcardama.moviedatabase.domain.usecase.SaveMovieUseCase
+import com.jcardama.moviedatabase.util.extension.*
 import javax.inject.Inject
 
 class MoviesViewModel @Inject constructor(
         private val getAllMoviesUseCase: GetAllMoviesUseCase,
         private val getFavoriteMoviesUseCase: GetFavoriteMoviesUseCase,
+        private val getWatchListMoviesUseCase: GetWatchListMoviesUseCase,
         private val saveMovieUseCase: SaveMovieUseCase
 ) : ViewModel() {
     val movies: MutableLiveData<MutableList<Movie>> by lazy { MutableLiveData<MutableList<Movie>>() }
     val favoriteMovies: MutableLiveData<MutableList<Movie>> by lazy { MutableLiveData<MutableList<Movie>>() }
-    val movieSave: MutableLiveData<Any> by lazy { MutableLiveData<Any>() }
-    val movieSaveError: MutableLiveData<ErrorModel> by lazy { MutableLiveData<ErrorModel>() }
+    val watchListMovies: MutableLiveData<MutableList<Movie>> by lazy { MutableLiveData<MutableList<Movie>>() }
 
     fun getMovies() = getAllMoviesUseCase.execute {
         onComplete { movies.value = it?.toMutableList() }
-        onError { movies.value = mutableListOf() }
     }
 
     fun getFavoriteMovies() = getFavoriteMoviesUseCase.execute {
         onComplete { favoriteMovies.value = it?.toMutableList() }
     }
 
-    fun saveMovie(data: Movie?) = saveMovieUseCase.execute(data) {
-        onComplete { movieSave.value = it }
-        onError { movieSaveError.value = it }
+    fun getWatchListMovies() = getWatchListMoviesUseCase.execute {
+        onComplete { watchListMovies.value = it?.toMutableList() }
+    }
+
+    fun save(data: Movie?) = saveMovieUseCase.execute(data) {
+        onComplete {
+            favoriteMovies.value = favoriteMovies.value?.addOrRemoveIf(data!!) { !data.favorite }
+            watchListMovies.value = watchListMovies.value?.addOrRemoveIf(data!!) { !data.addedToWatchList }
+            movies.value = movies.value?.replace(data!!) { it.id == data.id }
+        }
     }
 }
