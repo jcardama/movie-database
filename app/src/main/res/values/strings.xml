@@ -11,6 +11,12 @@
 	<string name="action_settings">Settings</string>
 
 	<!-- Titles -->
+	<string name="title_movies">Movies</string>
+	<string name="title_favorite_movies">Favorite movies</string>
+	<string name="title_watch_list">Watch list</string>
 
 	<!-- Messages -->
+	<string name="message_no_movies">There are no movies at this moment</string>
+	<string name="message_no_favorite_movies">Your favorite movies will appear here</string>
+	<string name="message_watch_list_empty">Your watch list is empty at this moment</string>
 </resources>

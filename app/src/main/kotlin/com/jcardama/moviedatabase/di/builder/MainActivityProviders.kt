@@ -16,4 +16,10 @@ abstract class MainActivityProviders {
 
 	@ContributesAndroidInjector
 	abstract fun provideSplashFragment(): SplashFragment
+
+	@ContributesAndroidInjector
+	abstract fun provideDashboardFragment(): MoviesFragment
+
+	@ContributesAndroidInjector
+	abstract fun provideWatchListFragment(): WatchListFragment
 }
