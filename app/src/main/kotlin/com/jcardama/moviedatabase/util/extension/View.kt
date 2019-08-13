@@ -6,7 +6,9 @@ import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
+import android.app.Activity
 import android.content.Context
+import android.content.ContextWrapper
 import android.os.Build
 import android.view.View
 import android.view.ViewAnimationUtils
@@ -26,6 +28,18 @@ fun View.showKeyboard() {
 		e.printStackTrace()
 	}
 }
+
+val View.activity: Activity?
+	get() {
+		var ctx = context
+		while (true) {
+			when {
+				!ContextWrapper::class.java.isInstance(ctx) -> return null
+				Activity::class.java.isInstance(ctx) -> return ctx as Activity
+				else -> ctx = (ctx as ContextWrapper).baseContext
+			}
+		}
+	}
 
 const val ANIMATION_DURATION_TIME = 250L
 

@@ -7,9 +7,13 @@ import retrofit2.http.*
 
 interface MovieService {
 	companion object {
-		private const val URL = "/3/movie/popular"
+		private const val GET_URL = "/3/movie/now_playing"
+		private const val SEARCH_URL = "/3/search/movie"
 	}
 
-	@GET(URL)
+	@GET(GET_URL)
 	fun getAsync(): Deferred<ApiResponse<List<Movie>>>
+
+	@GET(SEARCH_URL)
+	fun searchAsync(@Query("query") query: String): Deferred<ApiResponse<List<Movie>>>
 }

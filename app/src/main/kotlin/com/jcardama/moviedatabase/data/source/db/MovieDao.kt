@@ -11,12 +11,18 @@ interface MovieDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun save(subject: Movie?)
 
-    @Query("SELECT * FROM Movie")
+    @Query("SELECT * FROM Movie WHERE isFromSearch = 0")
     suspend fun getAll() : List<Movie>?
 
-    @Query("SELECT * FROM Movie WHERE favorite = 1")
+    @Query("SELECT * FROM Movie WHERE title LIKE '%' || :query || '%'")
+    suspend fun searchByTitle(query: String) : List<Movie>?
+
+    @Query("SELECT * FROM Movie WHERE searched = 1 LIMIT 5")
+    suspend fun getSearched() : List<Movie>?
+
+    @Query("SELECT * FROM Movie WHERE favorite = 1 AND isFromSearch = 0")
     suspend fun getFavorites() : List<Movie>?
 
-    @Query("SELECT * FROM Movie WHERE addedToWatchList = 1")
+    @Query("SELECT * FROM Movie WHERE addedToWatchList = 1 AND isFromSearch = 0")
     suspend fun getWatchList() : List<Movie>?
 }

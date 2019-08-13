@@ -5,7 +5,6 @@ package com.jcardama.moviedatabase.domain.model
 import androidx.room.Entity
 import androidx.room.Ignore
 import androidx.room.PrimaryKey
-import com.google.gson.Gson
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import com.jcardama.moviedatabase.domain.model.base.BaseModel
@@ -58,8 +57,12 @@ class Movie: BaseModel() {
     var releaseDate: String? = null
     var favorite: Boolean = false
     var addedToWatchList: Boolean = false
+    var isFromSearch: Boolean = false
+    var searched: Boolean = false
 
-    override fun toString(): String {
-        return Gson().toJson(this)
+    override fun equals(other: Any?): Boolean {
+        return other is Movie && this.id == other.id
     }
+
+    override fun hashCode(): Int = id
 }
