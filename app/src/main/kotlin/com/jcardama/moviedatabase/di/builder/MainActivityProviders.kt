@@ -4,6 +4,7 @@ package com.jcardama.moviedatabase.di.builder
 
 import com.jcardama.moviedatabase.ui.base.BaseFragment
 import com.jcardama.moviedatabase.ui.movies.MoviesFragment
+import com.jcardama.moviedatabase.ui.movies.details.DetailsFragment
 import com.jcardama.moviedatabase.ui.movies.favorites.FavoritesFragment
 import com.jcardama.moviedatabase.ui.movies.list.MoviesListFragment
 import com.jcardama.moviedatabase.ui.search.SearchFragment
@@ -14,24 +15,27 @@ import dagger.android.ContributesAndroidInjector
 
 @Module
 abstract class MainActivityProviders {
-	@ContributesAndroidInjector
-	abstract fun provideBaseFragment(): BaseFragment
+    @ContributesAndroidInjector
+    abstract fun provideBaseFragment(): BaseFragment
 
-	@ContributesAndroidInjector
-	abstract fun provideSplashFragment(): SplashFragment
+    @ContributesAndroidInjector
+    abstract fun provideSplashFragment(): SplashFragment
 
-	@ContributesAndroidInjector
-	abstract fun provideDashboardFragment(): MoviesFragment
+    @ContributesAndroidInjector
+    abstract fun provideDashboardFragment(): MoviesFragment
 
-	@ContributesAndroidInjector
-	abstract fun provideMoviesListFragment(): MoviesListFragment
+    @ContributesAndroidInjector
+    abstract fun provideMoviesListFragment(): MoviesListFragment
 
-	@ContributesAndroidInjector
-	abstract fun provideFavoritesFragment(): FavoritesFragment
+    @ContributesAndroidInjector
+    abstract fun provideFavoritesFragment(): FavoritesFragment
 
-	@ContributesAndroidInjector
-	abstract fun provideWatchListFragment(): WatchListFragment
+    @ContributesAndroidInjector
+    abstract fun provideWatchListFragment(): WatchListFragment
 
-	@ContributesAndroidInjector
-	abstract fun provideSearchFragment(): SearchFragment
+    @ContributesAndroidInjector
+    abstract fun provideDetailsFragment(): DetailsFragment
+
+    @ContributesAndroidInjector
+    abstract fun provideSearchFragment(): SearchFragment
 }

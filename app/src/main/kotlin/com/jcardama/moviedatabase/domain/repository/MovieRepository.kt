@@ -13,6 +13,8 @@ class MovieRepository @Inject constructor(
         return dao.save(movie)
     }
 
+    suspend fun getById(id: Int) = dao.getById(id)
+
     suspend fun searchByTitle(query: String): List<Movie>? = dao.searchByTitle(query)?.toMutableList().let {
         it?.addAll(api.searchAsync(query).await().results?.apply {
             for(item in this) {

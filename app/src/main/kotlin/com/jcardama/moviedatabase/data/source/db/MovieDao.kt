@@ -11,6 +11,9 @@ interface MovieDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun save(subject: Movie?)
 
+    @Query("SELECT * FROM Movie WHERE id = :id")
+    suspend fun getById(id: Int) : Movie?
+
     @Query("SELECT * FROM Movie WHERE isFromSearch = 0")
     suspend fun getAll() : List<Movie>?
 
