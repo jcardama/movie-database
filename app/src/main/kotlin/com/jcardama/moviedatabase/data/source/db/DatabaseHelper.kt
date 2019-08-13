@@ -10,7 +10,7 @@ import com.jcardama.moviedatabase.domain.model.Movie
 abstract class AppDatabase : RoomDatabase() {
     companion object {
         const val DB_NAME = "database.db"
-        const val VERSION = 2
+        const val VERSION = 4
     }
 
     abstract fun movieDao(): MovieDao
