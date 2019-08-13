@@ -19,4 +19,6 @@
 	<string name="message_no_movies">There are no movies at this moment</string>
 	<string name="message_no_favorite_movies">Your favorite movies will appear here</string>
 	<string name="message_watch_list_empty">Your watch list is empty at this moment</string>
+	<string name="action_search">Search</string>
+	<string name="hint_search">Search...</string>
 </resources>
