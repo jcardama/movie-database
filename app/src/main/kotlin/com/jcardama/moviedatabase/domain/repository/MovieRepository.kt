@@ -13,6 +13,25 @@ class MovieRepository @Inject constructor(
         return dao.save(movie)
     }
 
+    suspend fun searchByTitle(query: String): List<Movie>? = dao.searchByTitle(query)?.toMutableList().let {
+        it?.addAll(api.searchAsync(query).await().results?.apply {
+            for(item in this) {
+                val currentItem = when(it.contains(item)) {
+                    true -> {
+                        it.find { it == item }
+                    }
+                    else -> item
+                }
+                currentItem?.isFromSearch = true
+                currentItem?.timestamp = System.currentTimeMillis()
+                save(currentItem)
+            }
+        } ?: mutableListOf())
+        it?.distinctBy { it.id }
+    }
+
+    suspend fun getSearched(): List<Movie>? = dao.getSearched()
+
     suspend fun getAll(): List<Movie>? = dao.getAll().let {
         when {
             it.isNullOrEmpty() || it[0].expired() -> {
