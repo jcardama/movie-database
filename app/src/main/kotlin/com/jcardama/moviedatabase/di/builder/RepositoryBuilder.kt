@@ -6,4 +6,7 @@ import dagger.Binds
 import dagger.Module
 
 @Module
-abstract class RepositoryBuilder { }
+abstract class RepositoryBuilder {
+    @Binds
+    abstract fun bindsMovieRepository(movieRepository: MovieRepository): Repository
+}
