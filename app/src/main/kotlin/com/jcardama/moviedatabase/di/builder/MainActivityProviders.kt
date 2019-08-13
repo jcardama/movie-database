@@ -4,6 +4,9 @@ package com.jcardama.moviedatabase.di.builder
 
 import com.jcardama.moviedatabase.ui.base.BaseFragment
 import com.jcardama.moviedatabase.ui.movies.MoviesFragment
+import com.jcardama.moviedatabase.ui.movies.favorites.FavoritesFragment
+import com.jcardama.moviedatabase.ui.movies.list.MoviesListFragment
+import com.jcardama.moviedatabase.ui.search.SearchFragment
 import com.jcardama.moviedatabase.ui.splash.SplashFragment
 import com.jcardama.moviedatabase.ui.watchlist.WatchListFragment
 import dagger.Module
@@ -21,5 +24,14 @@ abstract class MainActivityProviders {
 	abstract fun provideDashboardFragment(): MoviesFragment
 
 	@ContributesAndroidInjector
+	abstract fun provideMoviesListFragment(): MoviesListFragment
+
+	@ContributesAndroidInjector
+	abstract fun provideFavoritesFragment(): FavoritesFragment
+
+	@ContributesAndroidInjector
 	abstract fun provideWatchListFragment(): WatchListFragment
+
+	@ContributesAndroidInjector
+	abstract fun provideSearchFragment(): SearchFragment
 }
