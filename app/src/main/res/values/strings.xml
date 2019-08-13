@@ -26,5 +26,4 @@
 	<string name="hint_search">Search</string>
 	<string name="hint_score">User\nScore</string>
 	<string name="hint_release_date">Release date: %1$s</string>
-
 </resources>
