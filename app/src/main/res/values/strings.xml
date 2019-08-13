@@ -1,0 +1,16 @@
+<resources>
+	<!-- App name -->
+	<string name="app_name">Movie database</string>
+
+	<!-- Navigation Drawer -->
+	<string name="navigation_drawer_open">Drawer opened</string>
+	<string name="navigation_drawer_close">Drawer closed</string>
+
+	<!-- Actions -->
+	<string name="action_watch_list">Watch list</string>
+	<string name="action_settings">Settings</string>
+
+	<!-- Titles -->
+
+	<!-- Messages -->
+</resources>
