@@ -14,6 +14,7 @@ import com.jcardama.moviedatabase.core.Config
 import com.jcardama.moviedatabase.domain.model.Movie
 import com.jcardama.moviedatabase.ui.base.BaseFragment
 import com.jcardama.moviedatabase.ui.movies.MoviesViewModel
+import com.jcardama.moviedatabase.ui.movies.details.DetailsFragment
 import com.jcardama.moviedatabase.util.adapter.RecyclerViewAdapterUtil
 import com.jcardama.moviedatabase.util.extension.*
 import kotlinx.android.synthetic.main.fragment_watch_list.view.*
@@ -74,6 +75,9 @@ class WatchListFragment : BaseFragment() {
                         item?.addedToWatchList = !(item?.addedToWatchList ?: false)
                         viewModel.save(item)
                     }
+                }
+                .setOnClickListener { _, item, _ ->
+                    activity.loadFragment(DetailsFragment::class.java, bundle { putInt("id", item?.id ?: 0) })
                 }
                 .into(view.recycler_view)
 
