@@ -11,4 +11,14 @@ import dagger.Module
 import dagger.multibindings.IntoMap
 
 @Module
-abstract class AppViewModelBuilder { }
+abstract class AppViewModelBuilder {
+    @Binds
+    @IntoMap
+    @ViewModelKey(MoviesViewModel::class)
+    abstract fun bindDashboardViewModel(viewModel: MoviesViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(WatchListViewModel::class)
+    abstract fun bindWatchListViewModel(viewModel: WatchListViewModel): ViewModel
+}
