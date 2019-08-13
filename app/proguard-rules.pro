@@ -67,7 +67,7 @@
 #Gson
 -dontwarn sun.misc.**
 -keep class com.google.gson.examples.android.model.** { *; }
--keep class com.jcardama.inspeccion.domain.model.** { *; }
+-keep class com.jcardama.moviedatabase.domain.model.** { *; }
 -keep class * implements com.google.gson.TypeAdapterFactory
 -keep class * implements com.google.gson.JsonSerializer
 -keep class * implements com.google.gson.JsonDeserializer

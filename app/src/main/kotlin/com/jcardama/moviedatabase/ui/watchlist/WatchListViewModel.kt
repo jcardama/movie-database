@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModel
 import com.jcardama.moviedatabase.domain.model.Movie
 import com.jcardama.moviedatabase.domain.usecase.GetWatchListMoviesUseCase
 import com.jcardama.moviedatabase.domain.usecase.SaveMovieUseCase
-import com.jcardama.moviedatabase.util.factory.ViewModelFactory_Factory
 import javax.inject.Inject
 
 class WatchListViewModel @Inject constructor(
