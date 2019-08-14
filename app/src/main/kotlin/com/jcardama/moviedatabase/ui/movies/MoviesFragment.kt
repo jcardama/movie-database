@@ -16,7 +16,7 @@ import com.jcardama.moviedatabase.ui.base.BaseFragment
 import com.jcardama.moviedatabase.ui.movies.favorites.FavoritesFragment
 import com.jcardama.moviedatabase.ui.movies.list.MoviesListFragment
 import com.jcardama.moviedatabase.ui.search.SearchFragment
-import com.jcardama.moviedatabase.ui.watchlist.WatchListFragment
+import com.jcardama.moviedatabase.ui.movies.watchlist.WatchListFragment
 import com.jcardama.moviedatabase.util.adapter.initAdapter
 import com.jcardama.moviedatabase.util.extension.loadFragment
 import com.jcardama.moviedatabase.util.extension.show
@@ -61,8 +61,6 @@ class MoviesFragment : BaseFragment(), NavigationView.OnNavigationItemSelectedLi
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.watchlist_item -> activity.loadFragment(WatchListFragment::class.java)
-            R.id.settings_item -> {
-            }
         }
 
         view?.drawer_layout?.closeDrawer(GravityCompat.START)
