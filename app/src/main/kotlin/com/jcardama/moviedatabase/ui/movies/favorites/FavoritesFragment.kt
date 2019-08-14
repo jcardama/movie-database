@@ -31,9 +31,9 @@ class FavoritesFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        view.recycler_view.layoutManager = GridLayoutManager(context!!, 2)
+        view.recycler_view.layoutManager = GridLayoutManager(context!!, resources.getInteger(R.integer.columns))
         view.recycler_view.addItemDecoration(
-                GridSpacingItemDecoration(2, activity?.dpToPx(15f) ?: 0, true)
+                GridSpacingItemDecoration(resources.getInteger(R.integer.columns), activity?.dpToPx(15f) ?: 0, true)
         )
 
         RecyclerViewAdapterUtil.Builder<Movie>(context!!, R.layout.item_movie)
@@ -42,11 +42,7 @@ class FavoritesFragment : BaseFragment() {
 
                     itemView.title_text_view.text = item?.title
 
-                    itemView.favorite_image_view.setVectorTint(when (item?.favorite) {
-                        true -> R.color.red_700
-                        else -> R.color.textColorPrimary
-                    })
-
+                    itemView.favorite_image_view.setVectorTint(R.color.red_700)
                     itemView.favorite_image_view.setOnClickListener {
                         item?.favorite = false
                         Toast.makeText(context!!, R.string.message_movie_removed_from_favorites, Toast.LENGTH_LONG).show()

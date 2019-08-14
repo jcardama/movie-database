@@ -40,9 +40,9 @@ class WatchListFragment : BaseFragment() {
             activity?.supportFragmentManager?.popBackStack()
         }
 
-        view.recycler_view.layoutManager = GridLayoutManager(context!!, 2)
+        view.recycler_view.layoutManager = GridLayoutManager(context!!, resources.getInteger(R.integer.columns))
         view.recycler_view.addItemDecoration(
-                GridSpacingItemDecoration(2, activity?.dpToPx(15f) ?: 0, true)
+                GridSpacingItemDecoration(resources.getInteger(R.integer.columns), activity?.dpToPx(15f) ?: 0, true)
         )
 
         RecyclerViewAdapterUtil.Builder<Movie>(context!!, R.layout.item_movie)
@@ -66,15 +66,10 @@ class WatchListFragment : BaseFragment() {
                             true -> R.color.red_700
                             else -> R.color.textColorPrimary
                         })
-
                         viewModel.save(item)
                     }
 
-                    itemView.watch_list_image_view.setImageResource(when (item?.addedToWatchList) {
-                        true -> R.drawable.ic_playlist_add_check
-                        else -> R.drawable.ic_playlist_add
-                    })
-
+                    itemView.watch_list_image_view.setImageResource(R.drawable.ic_playlist_add_check)
                     itemView.watch_list_image_view.setOnClickListener {
                         item?.addedToWatchList = !(item?.addedToWatchList ?: false)
                         Toast.makeText(context!!, R.string.message_movie_removed_from_watch_list, Toast.LENGTH_LONG).show()

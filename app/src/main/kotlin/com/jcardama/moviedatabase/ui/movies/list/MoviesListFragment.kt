@@ -33,9 +33,10 @@ class MoviesListFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        view.recycler_view.layoutManager = GridLayoutManager(context!!, 2)
+        view.recycler_view.layoutManager = GridLayoutManager(context!!, resources.getInteger(R.integer.columns))
         view.recycler_view.addItemDecoration(
-                GridSpacingItemDecoration(2, activity?.dpToPx(15f) ?: 0, true)
+                GridSpacingItemDecoration(resources.getInteger(R.integer.columns), activity?.dpToPx(15f)
+                        ?: 0, true)
         )
 
         RecyclerViewAdapterUtil.Builder<Movie>(context!!, R.layout.item_movie)
@@ -59,7 +60,6 @@ class MoviesListFragment : BaseFragment() {
                             true -> R.color.red_700
                             else -> R.color.textColorPrimary
                         })
-
                         viewModel.save(item)
                     }
 
@@ -82,7 +82,9 @@ class MoviesListFragment : BaseFragment() {
                     }
                 }
                 .setOnClickListener { _, item, _ ->
-                    activity.loadFragment(DetailsFragment::class.java, bundle { putInt("id", item?.id ?: 0) })
+                    activity.loadFragment(DetailsFragment::class.java, bundle {
+                        putInt("id", item?.id ?: 0)
+                    })
                 }
                 .into(view.recycler_view)
 
@@ -97,7 +99,8 @@ class MoviesListFragment : BaseFragment() {
                     else -> view.empty_layout.hide()
                 }
 
-                (view.recycler_view.adapter as RecyclerViewAdapterUtil<Movie>).setItems(movies ?: mutableListOf())
+                (view.recycler_view.adapter as RecyclerViewAdapterUtil<Movie>).setItems(movies
+                        ?: mutableListOf())
             })
         }
     }
