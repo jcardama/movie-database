@@ -23,6 +23,10 @@
 	<string name="message_no_movies">There are no movies at this moment</string>
 	<string name="message_no_favorite_movies">Your favorite movies will appear here</string>
 	<string name="message_watch_list_empty">Your watch list is empty at this moment</string>
+	<string name="message_movie_added_to_favorites">Movie added to favorites</string>
+	<string name="message_movie_removed_from_favorites">Movie removed from favorites</string>
+	<string name="message_movie_added_to_watch_list">Move added to watch list</string>
+	<string name="message_movie_removed_from_watch_list">Move removed from watch list</string>
 
 	<!-- Hints -->
 	<string name="hint_search">Search</string>
