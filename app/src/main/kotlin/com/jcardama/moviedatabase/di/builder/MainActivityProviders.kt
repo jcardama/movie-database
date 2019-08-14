@@ -9,7 +9,7 @@ import com.jcardama.moviedatabase.ui.movies.favorites.FavoritesFragment
 import com.jcardama.moviedatabase.ui.movies.list.MoviesListFragment
 import com.jcardama.moviedatabase.ui.search.SearchFragment
 import com.jcardama.moviedatabase.ui.splash.SplashFragment
-import com.jcardama.moviedatabase.ui.watchlist.WatchListFragment
+import com.jcardama.moviedatabase.ui.movies.watchlist.WatchListFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 

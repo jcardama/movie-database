@@ -1,6 +1,6 @@
 @file:Suppress("UNCHECKED_CAST")
 
-package com.jcardama.moviedatabase.ui.watchlist
+package com.jcardama.moviedatabase.ui.movies.watchlist
 
 import android.os.Bundle
 import android.view.LayoutInflater
