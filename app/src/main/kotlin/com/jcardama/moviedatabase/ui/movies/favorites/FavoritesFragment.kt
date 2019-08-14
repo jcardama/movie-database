@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
@@ -30,9 +31,9 @@ class FavoritesFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        view.recycler_view.layoutManager = GridLayoutManager(context!!, 2)
+        view.recycler_view.layoutManager = GridLayoutManager(context!!, resources.getInteger(R.integer.columns))
         view.recycler_view.addItemDecoration(
-                GridSpacingItemDecoration(2, activity?.dpToPx(15f) ?: 0, true)
+                GridSpacingItemDecoration(resources.getInteger(R.integer.columns), activity?.dpToPx(15f) ?: 0, true)
         )
 
         RecyclerViewAdapterUtil.Builder<Movie>(context!!, R.layout.item_movie)
@@ -41,13 +42,10 @@ class FavoritesFragment : BaseFragment() {
 
                     itemView.title_text_view.text = item?.title
 
-                    itemView.favorite_image_view.setVectorTint(when (item?.favorite) {
-                        true -> R.color.red_700
-                        else -> R.color.textColorPrimary
-                    })
-
+                    itemView.favorite_image_view.setVectorTint(R.color.red_700)
                     itemView.favorite_image_view.setOnClickListener {
                         item?.favorite = false
+                        Toast.makeText(context!!, R.string.message_movie_removed_from_favorites, Toast.LENGTH_LONG).show()
                         itemView.favorite_image_view.setVectorTint(R.color.textColorPrimary)
                         viewModel.save(item)
                     }
@@ -59,6 +57,10 @@ class FavoritesFragment : BaseFragment() {
 
                     itemView.watch_list_image_view.setOnClickListener {
                         item?.addedToWatchList = !(item?.addedToWatchList ?: false)
+                        Toast.makeText(context!!, when (item?.addedToWatchList) {
+                            true -> R.string.message_movie_added_to_watch_list
+                            else -> R.string.message_movie_removed_from_watch_list
+                        }, Toast.LENGTH_LONG).show()
                         itemView.watch_list_image_view.setImageResource(when (item?.addedToWatchList) {
                             true -> R.drawable.ic_playlist_add
                             else -> R.drawable.ic_playlist_add_check

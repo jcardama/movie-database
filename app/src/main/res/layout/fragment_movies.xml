@@ -35,7 +35,9 @@
         android:scrollbarTrackVertical="@color/colorPrimaryDark"
         android:scrollbars="none"
         android:verticalScrollbarPosition="left"
-        app:itemBackground="@color/colorPrimary"
+        android:theme="@style/NavigationView"
+        app:itemBackground="@color/colorPrimaryDark"
+        app:itemIconTint="@color/textColorPrimaryInverse"
         app:itemTextColor="@color/textColorPrimaryInverse"
         app:menu="@menu/navigation" />
 

@@ -61,8 +61,6 @@ class MoviesFragment : BaseFragment(), NavigationView.OnNavigationItemSelectedLi
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.watchlist_item -> activity.loadFragment(WatchListFragment::class.java)
-            R.id.settings_item -> {
-            }
         }
 
         view?.drawer_layout?.closeDrawer(GravityCompat.START)

@@ -10,9 +10,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jcardama.moviedatabase.R
 import com.jcardama.moviedatabase.domain.model.Movie
+import com.jcardama.moviedatabase.ui.movies.details.DetailsFragment
 import com.jcardama.moviedatabase.util.adapter.RecyclerViewAdapterUtil
-import com.jcardama.moviedatabase.util.extension.changeListener
-import com.jcardama.moviedatabase.util.extension.fadeIn
+import com.jcardama.moviedatabase.util.extension.*
 import dagger.android.support.DaggerDialogFragment
 import kotlinx.android.synthetic.main.fragment_dialog_search.view.*
 import kotlinx.android.synthetic.main.item_search.view.*
@@ -55,9 +55,11 @@ class SearchFragment : DaggerDialogFragment() {
                     itemView.title_text_view.text = item?.title
                 }
                 .setOnClickListener { _, item, _ ->
+                    activity?.hideKeyboard()
                     item?.searched = true
                     item?.timestamp = System.currentTimeMillis()
                     viewModel.save(item)
+                    activity.loadFragment(DetailsFragment::class.java, bundle { putInt("id", item?.id ?: 0) })
                     dismiss()
                 }
                 .into(view.recycler_view)
@@ -67,7 +69,7 @@ class SearchFragment : DaggerDialogFragment() {
 
             view.search_edit_text.changeListener { _, s ->
                 when {
-                    s.isEmpty() -> getSearchedMovies()
+                    s.length <= 3 -> getSearchedMovies()
                     else -> searchMoviesByTitle(s)
                 }
             }
