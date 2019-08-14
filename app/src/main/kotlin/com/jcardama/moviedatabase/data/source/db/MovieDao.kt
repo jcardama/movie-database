@@ -23,9 +23,9 @@ interface MovieDao {
     @Query("SELECT * FROM Movie WHERE searched = 1 LIMIT 5")
     suspend fun getSearched() : List<Movie>?
 
-    @Query("SELECT * FROM Movie WHERE favorite = 1 AND isFromSearch = 0")
+    @Query("SELECT * FROM Movie WHERE favorite = 1")
     suspend fun getFavorites() : List<Movie>?
 
-    @Query("SELECT * FROM Movie WHERE addedToWatchList = 1 AND isFromSearch = 0")
+    @Query("SELECT * FROM Movie WHERE addedToWatchList = 1")
     suspend fun getWatchList() : List<Movie>?
 }
