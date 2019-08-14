@@ -54,6 +54,10 @@
         <item name="colorAccent">@color/textColorPrimaryInverse</item>
     </style>
 
+    <style name="NavigationView">
+        <item name="android:textColorSecondary">@color/textColorSecondaryInverse</item>
+    </style>
+
     <style name="ProgressBar.White" parent="@style/Theme.AppCompat">
         <item name="colorAccent">@android:color/white</item>
     </style>
