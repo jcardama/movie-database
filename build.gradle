@@ -1,13 +1,54 @@
 buildscript {
-    ext.kotlin_version = '1.3.41'
-    ext.android_plugin_version = '3.5.0-rc03'
+    ext {
+        // Sdk and tools
+        compileSdkVersion = 29
+        minSdkVersion = 19
+        targetSdkVersion = 29
+
+        // App dependencies
+        appCompatVersion = '1.1.0'
+        constraintLayoutVersion = '2.0.0-beta3'
+        cardViewVersion = '1.0.0'
+        coreTestingVersion = '2.1.0'
+        coroutinesVersion = "1.3.0"
+        daggerVersion = "2.24"
+        espressoVersion = '3.2.0'
+        fragmentVersion = '1.2.0-rc02'
+        glideVersion = '4.10.0'
+        gradleVersion = '3.5.2'
+        gsonVersion = '2.8.6'
+        junitVersion = '4.12'
+        kotlinVersion = '1.3.50'
+        ktlintVersion = '0.30.0'
+        ktxVersion = '1.2.0-rc01'
+        leakCanaryVersion = '1.6.3'
+        lifecycleVersion = '2.2.0-rc02'
+        loggingInterceptorVersion = '4.2.2'
+        materialVersion = '1.2.0-alpha02'
+        multidexVersion = '2.0.1'
+        navigationVersion = '2.2.0-rc02'
+        recyclerViewVersion = '1.1.0'
+        retrofitVersion = '2.6.2'
+        roomVersion = '2.2.2'
+        runnerVersion = '1.0.1'
+        safeArgsVersion = '1.0.0-alpha01'
+        stethoVersion = '1.5.1'
+        timberVersion = '4.7.1'
+        testExtJunit = '1.1.1'
+        truthVersion = '1.0'
+        uiAutomatorVersion = '2.2.0'
+        viewPager2Version = '1.0.0'
+        workVersion = '2.2.0'
+    }
+
     repositories {
         google()
         jcenter()
     }
     dependencies {
-        classpath "com.android.tools.build:gradle:$android_plugin_version"
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "com.android.tools.build:gradle:$gradleVersion"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+        classpath "android.arch.navigation:navigation-safe-args-gradle-plugin:$safeArgsVersion"
     }
 }
 
