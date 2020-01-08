@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
@@ -44,12 +45,14 @@ class MoviesListFragment : BaseFragment() {
 
             itemView.favorite_image_view.setOnClickListener {
                 item?.favorite = !(item?.favorite ?: false)
-
+                Toast.makeText(context!!, when (item?.favorite) {
+                    true -> R.string.message_movie_added_to_favorites
+                    else -> R.string.message_movie_removed_from_favorites
+                }, Toast.LENGTH_LONG).show()
                 itemView.favorite_image_view.setVectorTint(when (item?.favorite) {
                     true -> R.color.red_700
                     else -> R.color.textColorPrimary
                 })
-
                 viewModel.save(item)
             }
 
@@ -60,6 +63,10 @@ class MoviesListFragment : BaseFragment() {
 
             itemView.watch_list_image_view.setOnClickListener {
                 item?.addedToWatchList = !(item?.addedToWatchList ?: false)
+                Toast.makeText(context!!, when (item?.addedToWatchList) {
+                    true -> R.string.message_movie_added_to_watch_list
+                    else -> R.string.message_movie_removed_from_watch_list
+                }, Toast.LENGTH_LONG).show()
                 itemView.watch_list_image_view.setImageResource(when (item?.addedToWatchList) {
                     true -> R.drawable.ic_playlist_add_check
                     else -> R.drawable.ic_playlist_add

@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -52,12 +53,14 @@ class WatchListFragment : BaseFragment() {
 
             itemView.favorite_image_view.setOnClickListener {
                 item?.favorite = !(item?.favorite ?: false)
-
+                Toast.makeText(context!!, when (item?.favorite) {
+                    true -> R.string.message_movie_added_to_watch_list
+                    else -> R.string.message_movie_removed_from_watch_list
+                }, Toast.LENGTH_LONG).show()
                 itemView.favorite_image_view.setVectorTint(when (item?.favorite) {
                     true -> R.color.red_700
                     else -> R.color.textColorPrimary
                 })
-
                 viewModel.save(item)
             }
 
@@ -68,6 +71,7 @@ class WatchListFragment : BaseFragment() {
 
             itemView.watch_list_image_view.setOnClickListener {
                 item?.addedToWatchList = !(item?.addedToWatchList ?: false)
+                Toast.makeText(context!!, R.string.message_movie_removed_from_watch_list, Toast.LENGTH_LONG).show()
                 viewModel.save(item)
             }
         }.setOnClickListener { _, item, _ ->
