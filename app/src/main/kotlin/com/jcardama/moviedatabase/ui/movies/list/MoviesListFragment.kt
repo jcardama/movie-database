@@ -30,8 +30,8 @@ class MoviesListFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        view.recycler_view.layoutManager = GridLayoutManager(context!!, 2)
-        view.recycler_view.addItemDecoration(GridSpacingItemDecoration(2, activity?.dpToPx(15f) ?: 0, true))
+        view.recycler_view.layoutManager = GridLayoutManager(context!!, resources.getInteger(R.integer.columns))
+        view.recycler_view.addItemDecoration(GridSpacingItemDecoration(resources.getInteger(R.integer.columns), activity?.dpToPx(15f) ?: 0, true))
 
         RecyclerViewAdapterUtil.Builder<Movie>(context!!, R.layout.item_movie).bindView { itemView, item, _ ->
             itemView.cover_image_view.loadFromUrl("${Config.POSTER_BASE_URL}${item?.posterPath}")
