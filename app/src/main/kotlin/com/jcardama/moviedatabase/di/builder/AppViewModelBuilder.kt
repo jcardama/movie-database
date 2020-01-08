@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel
 import com.jcardama.moviedatabase.di.qualifier.ViewModelKey
 import com.jcardama.moviedatabase.ui.movies.MoviesViewModel
 import com.jcardama.moviedatabase.ui.search.SearchViewModel
-import com.jcardama.moviedatabase.ui.watchlist.WatchListViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -22,9 +21,4 @@ abstract class AppViewModelBuilder {
     @IntoMap
     @ViewModelKey(SearchViewModel::class)
     abstract fun bindSearchViewModel(viewModel: SearchViewModel): ViewModel
-
-    @Binds
-    @IntoMap
-    @ViewModelKey(WatchListViewModel::class)
-    abstract fun bindWatchListViewModel(viewModel: WatchListViewModel): ViewModel
 }

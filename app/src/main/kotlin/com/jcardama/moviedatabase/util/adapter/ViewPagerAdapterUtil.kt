@@ -14,7 +14,7 @@ fun ViewPager2.initAdapter(): ViewPagerFragmentAdapter? {
 }
 
 class ViewPagerFragmentAdapter(activity: FragmentActivity) : FragmentStateAdapter(activity) {
-    var fragments: MutableList<Fragment> = mutableListOf()
+    private var fragments: MutableList<Fragment> = mutableListOf()
 
     override fun getItemCount(): Int = fragments.size
 

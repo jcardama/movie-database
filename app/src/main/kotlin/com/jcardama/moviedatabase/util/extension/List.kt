@@ -1,9 +1,5 @@
 package com.jcardama.moviedatabase.util.extension
 
-fun <TModel> List<TModel>.toArrayList(): ArrayList<TModel> {
-    return ArrayList(this)
-}
-
 fun <T> MutableList<T>.replace(newValue: T, block: (T) -> Boolean): MutableList<T> {
     return map {
         if (block(it)) newValue else it
