@@ -9,6 +9,8 @@
 	<!-- Actions -->
 	<string name="action_watch_list">Watch list</string>
 	<string name="action_search">Search</string>
+	<string name="action_add_to_favorites">Add to favorites</string>
+	<string name="action_add_to_watch_list">Add to watch list</string>
 
 	<!-- Titles -->
 	<string name="title_watch_list">Watch list</string>
@@ -27,5 +29,4 @@
 	<string name="hint_search">Search</string>
 	<string name="hint_score">User\nScore</string>
 	<string name="hint_release_date">Release date: %1$s</string>
-
 </resources>
