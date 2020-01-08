@@ -8,12 +8,9 @@
 
 	<!-- Actions -->
 	<string name="action_watch_list">Watch list</string>
-	<string name="action_settings">Settings</string>
 	<string name="action_search">Search</string>
 
 	<!-- Titles -->
-	<string name="title_movies">Movies</string>
-	<string name="title_favorite_movies">Favorite movies</string>
 	<string name="title_watch_list">Watch list</string>
 	<string name="title_overview">Overview</string>
 

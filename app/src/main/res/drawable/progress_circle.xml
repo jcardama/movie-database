@@ -25,7 +25,8 @@
                 android:thicknessRatio="25.0"
                 android:useLevel="true">
 
-                <rotate
+                <!--suppress AndroidElementNotAllowed -->
+				<rotate
                     android:fromDegrees="0"
                     android:pivotX="50%"
                     android:pivotY="50%"

@@ -2,7 +2,6 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
-	android:id="@+id/nav_graph"
 	app:startDestination="@id/splashFragment">
 
 	<fragment
@@ -11,7 +10,6 @@
 		android:label="SplashFragment"
 		tools:layout="@layout/fragment_splash">
 		<action
-			android:id="@+id/action_splashFragment_to_moviesFragment"
 			app:destination="@id/moviesFragment"
 			app:enterAnim="@anim/enter"
 			app:exitAnim="@anim/exit"
@@ -27,21 +25,18 @@
 		android:label="MoviesFragment"
 		tools:layout="@layout/fragment_movies">
 		<action
-			android:id="@+id/action_moviesFragment_to_watchListFragment"
 			app:destination="@id/watchListFragment"
 			app:enterAnim="@anim/enter"
 			app:exitAnim="@anim/exit"
 			app:popEnterAnim="@anim/pop_enter"
 			app:popExitAnim="@anim/pop_exit" />
 		<action
-			android:id="@+id/action_moviesFragment_to_searchFragment"
 			app:destination="@id/searchFragment"
 			app:enterAnim="@anim/enter"
 			app:exitAnim="@anim/exit"
 			app:popEnterAnim="@anim/pop_enter"
 			app:popExitAnim="@anim/pop_exit" />
 		<action
-			android:id="@+id/action_moviesFragment_to_detailsFragment"
 			app:destination="@id/detailsFragment"
 			app:enterAnim="@anim/enter"
 			app:exitAnim="@anim/exit"
@@ -55,7 +50,6 @@
 		android:label="WatchListFragment"
 		tools:layout="@layout/fragment_watch_list" >
 		<action
-			android:id="@+id/action_watchListFragment_to_detailsFragment"
 			app:destination="@id/detailsFragment"
 			app:enterAnim="@anim/enter"
 			app:exitAnim="@anim/exit"
@@ -69,7 +63,6 @@
 		android:label="SearchFragment"
 		tools:layout="@layout/fragment_dialog_search" >
 		<action
-			android:id="@+id/action_searchFragment_to_detailsFragment"
 			app:destination="@id/detailsFragment"
 			app:enterAnim="@anim/enter"
 			app:exitAnim="@anim/exit"
