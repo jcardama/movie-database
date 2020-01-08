@@ -15,12 +15,12 @@ class MovieRepository @Inject constructor(
 
     suspend fun getById(id: Int) = dao.getById(id)
 
-    suspend fun searchByTitle(query: String): List<Movie>? = dao.searchByTitle(query)?.toMutableList().let {
-        it?.addAll(api.searchAsync(query).await().results?.apply {
+    suspend fun searchByTitle(query: String): List<Movie>? = dao.searchByTitle(query)?.toMutableList().let { movies ->
+        movies?.addAll(api.searchAsync(query).await().results?.apply {
             for(item in this) {
-                val currentItem = when(it.contains(item)) {
+                val currentItem = when(movies.contains(item)) {
                     true -> {
-                        it.find { it == item }
+                        movies.find { it == item }
                     }
                     else -> item
                 }
@@ -29,7 +29,7 @@ class MovieRepository @Inject constructor(
                 save(currentItem)
             }
         } ?: mutableListOf())
-        it?.distinctBy { it.id }
+        movies?.distinctBy { it.id }
     }
 
     suspend fun getSearched(): List<Movie>? = dao.getSearched()

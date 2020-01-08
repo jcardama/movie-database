@@ -38,7 +38,7 @@ abstract class UseCase<in I: Any?, O>(private val errorUtil: ErrorMapper) {
         }
     }
 
-    fun unsubscribe() {
+    private fun unsubscribe() {
         parentJob.apply {
             cancelChildren()
             cancel()

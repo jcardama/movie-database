@@ -7,6 +7,7 @@ import dagger.Module
 
 @Module(includes = [(RepositoryBuilder::class), (AppViewModelBuilder::class)])
 abstract class ViewModelBuilder {
+    @Suppress("unused")
     @Binds
     abstract fun bindViewModelFactory(viewModelFactory: ViewModelFactory): ViewModelProvider.Factory
 }

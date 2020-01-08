@@ -1,5 +1,6 @@
 package com.jcardama.moviedatabase.data.restful
 
+import com.jcardama.moviedatabase.core.Config
 import com.jcardama.moviedatabase.domain.model.Movie
 import com.jcardama.moviedatabase.domain.model.response.ApiResponse
 import kotlinx.coroutines.Deferred
@@ -12,8 +13,8 @@ interface MovieService {
 	}
 
 	@GET(GET_URL)
-	fun getAsync(): Deferred<ApiResponse<List<Movie>>>
+	fun getAsync(@Query("api_key") apiKey: String = Config.API_KEY): Deferred<ApiResponse<List<Movie>>>
 
 	@GET(SEARCH_URL)
-	fun searchAsync(@Query("query") query: String): Deferred<ApiResponse<List<Movie>>>
+	fun searchAsync(@Query("query") query: String, @Query("api_key") apiKey: String = Config.API_KEY): Deferred<ApiResponse<List<Movie>>>
 }
