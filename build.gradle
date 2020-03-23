@@ -7,38 +7,38 @@ buildscript {
 
         // App dependencies
         appCompatVersion = '1.1.0'
-        constraintLayoutVersion = '2.0.0-beta3'
+        constraintLayoutVersion = '2.0.0-beta4'
         cardViewVersion = '1.0.0'
         coreTestingVersion = '2.1.0'
         coroutinesVersion = "1.3.0"
-        daggerVersion = "2.24"
+        daggerVersion = '2.27'
         espressoVersion = '3.2.0'
-        fragmentVersion = '1.2.0-rc02'
-        glideVersion = '4.10.0'
+        fragmentVersion = '1.3.0-alpha01'
+        glideVersion = '4.11.0'
         gradleVersion = '4.0.0-beta02'
         gsonVersion = '2.8.6'
-        junitVersion = '4.12'
-        kotlinVersion = '1.3.50'
+        junitVersion = '4.13'
+        kotlinVersion = '1.3.71'
         ktlintVersion = '0.30.0'
-        ktxVersion = '1.2.0-rc01'
+        ktxVersion = '1.3.0-alpha02'
         leakCanaryVersion = '1.6.3'
-        lifecycleVersion = '2.2.0-rc02'
-        loggingInterceptorVersion = '4.2.2'
-        materialVersion = '1.2.0-alpha02'
+        lifecycleVersion = '2.2.0'
+        loggingInterceptorVersion = '4.4.1'
+        materialVersion = '1.2.0-alpha05'
         multidexVersion = '2.0.1'
-        navigationVersion = '2.2.0-rc02'
+        navigationVersion = '2.3.0-alpha03'
         recyclerViewVersion = '1.1.0'
-        retrofitVersion = '2.6.2'
-        roomVersion = '2.2.2'
+        retrofitVersion = '2.8.0'
+        roomVersion = '2.2.4'
         runnerVersion = '1.0.1'
-        safeArgsVersion = '1.0.0-alpha01'
+        safeArgsVersion = '2.1.0'
         stethoVersion = '1.5.1'
         timberVersion = '4.7.1'
         testExtJunit = '1.1.1'
-        truthVersion = '1.0'
+        truthVersion = '1.0.1'
         uiAutomatorVersion = '2.2.0'
         viewPager2Version = '1.0.0'
-        workVersion = '2.2.0'
+        workVersion = '2.3.3'
     }
 
     repositories {
@@ -48,7 +48,7 @@ buildscript {
     dependencies {
         classpath "com.android.tools.build:gradle:$gradleVersion"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
-        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$navigationVersion"
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$safeArgsVersion"
     }
 }
 
@@ -56,25 +56,7 @@ allprojects {
     repositories {
         google()
         jcenter()
-        maven {
-            url 'https://maven.google.com/'
-        }
-    }
-}
-
-task clean(type: Delete) {
-    delete rootProject.buildDir
-}
-
-// Disable incremental builds on the build server
-project.ext.preDexLibs = !project.hasProperty('disablePreDex')
-
-subprojects {
-    project.plugins.whenPluginAdded { plugin ->
-        if ("com.android.build.gradle.AppPlugin" == plugin.class.name) {
-            project.android.dexOptions.preDexLibraries = rootProject.ext.preDexLibs
-        } else if ("com.android.build.gradle.LibraryPlugin" == plugin.class.name) {
-            project.android.dexOptions.preDexLibraries = rootProject.ext.preDexLibs
-        }
+        maven { url 'https://maven.google.com/' }
+        maven { url 'https://www.jitpack.io' }
     }
 }
