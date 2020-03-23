@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jcardama.moviedatabase.R
 import com.jcardama.moviedatabase.domain.model.Movie
@@ -59,7 +60,7 @@ class SearchFragment : DaggerDialogFragment() {
                     item?.searched = true
                     item?.timestamp = System.currentTimeMillis()
                     viewModel.save(item)
-                    activity.loadFragment(DetailsFragment::class.java, bundle { putInt("id", item?.id ?: 0) })
+                    findNavController()
                     dismiss()
                 }
                 .into(view.recycler_view)

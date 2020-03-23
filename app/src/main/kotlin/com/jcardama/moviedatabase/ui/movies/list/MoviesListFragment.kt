@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.jcardama.moviedatabase.R
 import com.jcardama.moviedatabase.core.Config
@@ -34,59 +35,51 @@ class MoviesListFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         view.recycler_view.layoutManager = GridLayoutManager(context!!, resources.getInteger(R.integer.columns))
-        view.recycler_view.addItemDecoration(
-                GridSpacingItemDecoration(resources.getInteger(R.integer.columns), activity?.dpToPx(15f)
-                        ?: 0, true)
-        )
+        view.recycler_view.addItemDecoration(GridSpacingItemDecoration(resources.getInteger(R.integer.columns), activity?.dpToPx(15f) ?: 0, true))
 
-        RecyclerViewAdapterUtil.Builder<Movie>(context!!, R.layout.item_movie)
-                .bindView { itemView, item, _ ->
-                    itemView.cover_image_view.loadFromUrl("${Config.POSTER_BASE_URL}${item?.posterPath}")
+        RecyclerViewAdapterUtil.Builder<Movie>(context!!, R.layout.item_movie).bindView { itemView, item, _ ->
+            itemView.cover_image_view.loadFromUrl("${Config.POSTER_BASE_URL}${item?.posterPath}")
 
-                    itemView.title_text_view.text = item?.title
+            itemView.title_text_view.text = item?.title
 
-                    itemView.favorite_image_view.setVectorTint(when (item?.favorite) {
-                        true -> R.color.red_700
-                        else -> R.color.textColorPrimary
-                    })
+            itemView.favorite_image_view.setVectorTint(when (item?.favorite) {
+                true -> R.color.red_700
+                else -> R.color.textColorPrimary
+            })
 
-                    itemView.favorite_image_view.setOnClickListener {
-                        item?.favorite = !(item?.favorite ?: false)
-                        Toast.makeText(context!!, when (item?.favorite) {
-                            true -> R.string.message_movie_added_to_favorites
-                            else -> R.string.message_movie_removed_from_favorites
-                        }, Toast.LENGTH_LONG).show()
-                        itemView.favorite_image_view.setVectorTint(when (item?.favorite) {
-                            true -> R.color.red_700
-                            else -> R.color.textColorPrimary
-                        })
-                        viewModel.save(item)
-                    }
+            itemView.favorite_image_view.setOnClickListener {
+                item?.favorite = !(item?.favorite ?: false)
+                Toast.makeText(context!!, when (item?.favorite) {
+                    true -> R.string.message_movie_added_to_favorites
+                    else -> R.string.message_movie_removed_from_favorites
+                }, Toast.LENGTH_LONG).show()
+                itemView.favorite_image_view.setVectorTint(when (item?.favorite) {
+                    true -> R.color.red_700
+                    else -> R.color.textColorPrimary
+                })
+                viewModel.save(item)
+            }
 
-                    itemView.watch_list_image_view.setImageResource(when (item?.addedToWatchList) {
-                        true -> R.drawable.ic_playlist_add_check
-                        else -> R.drawable.ic_playlist_add
-                    })
+            itemView.watch_list_image_view.setImageResource(when (item?.addedToWatchList) {
+                true -> R.drawable.ic_playlist_add_check
+                else -> R.drawable.ic_playlist_add
+            })
 
-                    itemView.watch_list_image_view.setOnClickListener {
-                        item?.addedToWatchList = !(item?.addedToWatchList ?: false)
-                        Toast.makeText(context!!, when (item?.addedToWatchList) {
-                            true -> R.string.message_movie_added_to_watch_list
-                            else -> R.string.message_movie_removed_from_watch_list
-                        }, Toast.LENGTH_LONG).show()
-                        itemView.watch_list_image_view.setImageResource(when (item?.addedToWatchList) {
-                            true -> R.drawable.ic_playlist_add_check
-                            else -> R.drawable.ic_playlist_add
-                        })
-                        viewModel.save(item)
-                    }
-                }
-                .setOnClickListener { _, item, _ ->
-                    activity.loadFragment(DetailsFragment::class.java, bundle {
-                        putInt("id", item?.id ?: 0)
-                    })
-                }
-                .into(view.recycler_view)
+            itemView.watch_list_image_view.setOnClickListener {
+                item?.addedToWatchList = !(item?.addedToWatchList ?: false)
+                Toast.makeText(context!!, when (item?.addedToWatchList) {
+                    true -> R.string.message_movie_added_to_watch_list
+                    else -> R.string.message_movie_removed_from_watch_list
+                }, Toast.LENGTH_LONG).show()
+                itemView.watch_list_image_view.setImageResource(when (item?.addedToWatchList) {
+                    true -> R.drawable.ic_playlist_add_check
+                    else -> R.drawable.ic_playlist_add
+                })
+                viewModel.save(item)
+            }
+        }.setOnClickListener { _, item, _ ->
+            findNavController()
+        }.into(view.recycler_view)
 
         with(viewModel) {
             getMovies()
@@ -99,8 +92,7 @@ class MoviesListFragment : BaseFragment() {
                     else -> view.empty_layout.hide()
                 }
 
-                (view.recycler_view.adapter as RecyclerViewAdapterUtil<Movie>).setItems(movies
-                        ?: mutableListOf())
+                (view.recycler_view.adapter as RecyclerViewAdapterUtil<Movie>).setItems(movies ?: mutableListOf())
             })
         }
     }

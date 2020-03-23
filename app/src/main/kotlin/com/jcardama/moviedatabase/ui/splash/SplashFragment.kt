@@ -6,18 +6,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.jcardama.moviedatabase.R
 import com.jcardama.moviedatabase.ui.base.BaseFragment
-import com.jcardama.moviedatabase.ui.movies.MoviesFragment
 import com.jcardama.moviedatabase.util.extension.fadeIn
-import com.jcardama.moviedatabase.util.extension.loadFragment
 import com.jcardama.moviedatabase.util.extension.scaleFadeIn
-import kotlinx.android.synthetic.main.fragment_splash.view.logo_image_view
-import kotlinx.android.synthetic.main.fragment_splash.view.splash_progress_bar
+import kotlinx.android.synthetic.main.fragment_splash.view.*
 
 class SplashFragment : BaseFragment() {
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_splash, container, false)
     }
 
@@ -27,10 +24,10 @@ class SplashFragment : BaseFragment() {
             override fun onAnimationRepeat(animation: Animator?) = Unit
             override fun onAnimationCancel(animation: Animator?) = Unit
             override fun onAnimationStart(animation: Animator?) = Unit
-            override fun onAnimationEnd(animation: Animator?) = run {
+            override fun onAnimationEnd(animation: Animator?) {
                 view.splash_progress_bar.fadeIn(250, object : AnimatorListenerAdapter() {
                     override fun onAnimationEnd(animation: Animator?) {
-                        activity.loadFragment(MoviesFragment::class.java, true)
+                        findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToMoviesFragment())
                     }
                 })
             }

@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.jcardama.moviedatabase.R
 import com.jcardama.moviedatabase.core.Config
@@ -77,7 +78,7 @@ class WatchListFragment : BaseFragment() {
                     }
                 }
                 .setOnClickListener { _, item, _ ->
-                    activity.loadFragment(DetailsFragment::class.java, bundle { putInt("id", item?.id ?: 0) })
+                    findNavController()
                 }
                 .into(view.recycler_view)
 

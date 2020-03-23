@@ -1,24 +1,20 @@
 package com.jcardama.moviedatabase.ui.main
 
 import android.os.Bundle
+import androidx.navigation.NavController
+import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
 import com.jcardama.moviedatabase.R
-import com.jcardama.moviedatabase.ui.splash.SplashFragment
-import com.jcardama.moviedatabase.util.extension.loadFragment
 import dagger.android.support.DaggerAppCompatActivity
-import timber.log.Timber
 
 class MainActivity : DaggerAppCompatActivity() {
+    private lateinit var navController: NavController
+    private lateinit var appBarConfiguration: AppBarConfiguration
 
-	override fun onCreate(savedInstanceState: Bundle?) {
-		super.onCreate(savedInstanceState)
-		setContentView(R.layout.activity_base)
-		loadFragment(SplashFragment::class.java, true)
-	}
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_base)
+        navController = findNavController(R.id.navigation_fragment)
+    }
 
-	override fun onBackPressed() {
-		when (supportFragmentManager.backStackEntryCount) {
-			1 -> this.finish()
-			else -> super.onBackPressed()
-		}
-	}
 }
