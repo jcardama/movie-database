@@ -6,7 +6,7 @@ import com.jcardama.moviedatabase.domain.model.Movie
 
 @Database(entities = [
     Movie::class
-], version = AppDatabase.VERSION)
+], version = AppDatabase.VERSION, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
     companion object {
         const val DB_NAME = "database.db"
