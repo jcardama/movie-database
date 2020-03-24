@@ -7,14 +7,12 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.jcardama.moviedatabase.R
 import com.jcardama.moviedatabase.core.Config
 import com.jcardama.moviedatabase.domain.model.Movie
 import com.jcardama.moviedatabase.ui.base.BaseFragment
 import com.jcardama.moviedatabase.ui.movies.MoviesViewModel
-import com.jcardama.moviedatabase.ui.movies.details.DetailsFragment
 import com.jcardama.moviedatabase.util.adapter.RecyclerViewAdapterUtil
 import com.jcardama.moviedatabase.util.extension.*
 import kotlinx.android.synthetic.main.fragment_movies_list.view.*
@@ -27,9 +25,7 @@ class MoviesListFragment : BaseFragment() {
         ViewModelProvider(activity!!, viewModelFactory).get(MoviesViewModel::class.java)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_movies_list, container, false)
-    }
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? = inflater.inflate(R.layout.fragment_movies_list, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -78,7 +74,7 @@ class MoviesListFragment : BaseFragment() {
                 viewModel.save(item)
             }
         }.setOnClickListener { _, item, _ ->
-            findNavController()
+            viewModel.movie.value = item
         }.into(view.recycler_view)
 
         with(viewModel) {

@@ -9,6 +9,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.tabs.TabLayoutMediator
@@ -22,9 +24,11 @@ import kotlinx.android.synthetic.main.fragment_movies.view.*
 import kotlinx.android.synthetic.main.view_appbar_title.view.*
 
 class MoviesFragment : BaseFragment(), NavigationView.OnNavigationItemSelectedListener {
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_movies, container, false)
+    private val viewModel: MoviesViewModel by lazy {
+        ViewModelProvider(activity!!, viewModelFactory).get(MoviesViewModel::class.java)
     }
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? = inflater.inflate(R.layout.fragment_movies, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -54,11 +58,17 @@ class MoviesFragment : BaseFragment(), NavigationView.OnNavigationItemSelectedLi
         }.attach()
 
         view.tab_layout.show()
+
+        viewModel.movie.observe(viewLifecycleOwner) {
+            when {
+                it != null -> findNavController().navigate(MoviesFragmentDirections.actionMoviesFragmentToDetailsFragment())
+            }
+        }
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.watchlist_item -> findNavController().navigate(MoviesFragmentDirections.actionMoviesFragmentToWatchlistFragment())
+            R.id.watchlist_item -> findNavController().navigate(MoviesFragmentDirections.actionMoviesFragmentToWatchListFragment())
         }
 
         view?.drawer_layout?.closeDrawer(GravityCompat.START)

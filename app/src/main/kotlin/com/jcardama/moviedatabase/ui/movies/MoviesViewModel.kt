@@ -11,17 +11,12 @@ class MoviesViewModel @Inject constructor(
         private val getAllMoviesUseCase: GetAllMoviesUseCase,
         private val getFavoriteMoviesUseCase: GetFavoriteMoviesUseCase,
         private val getWatchListMoviesUseCase: GetWatchListMoviesUseCase,
-        private val getMovieByIdUseCase: GetMovieByIdUseCase,
         private val saveMovieUseCase: SaveMovieUseCase
 ) : ViewModel() {
     val movies: MutableLiveData<MutableList<Movie>> by lazy { MutableLiveData<MutableList<Movie>>() }
     val movie: MutableLiveData<Movie> by lazy { MutableLiveData<Movie>() }
     val favoriteMovies: MutableLiveData<MutableList<Movie>> by lazy { MutableLiveData<MutableList<Movie>>() }
     val watchListMovies: MutableLiveData<MutableList<Movie>> by lazy { MutableLiveData<MutableList<Movie>>() }
-
-    fun getMovieById(id: Int) = getMovieByIdUseCase.execute(id) {
-        onComplete { movie.value = it }
-    }
 
     fun getMovies() = getAllMoviesUseCase.execute {
         onComplete { movies.value = it?.toMutableList() }

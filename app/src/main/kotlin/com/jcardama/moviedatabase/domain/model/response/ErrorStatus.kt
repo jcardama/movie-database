@@ -5,9 +5,7 @@ package com.jcardama.moviedatabase.domain.model.response
  */
 enum class ErrorStatus {
     NO_CONNECTION,
-    BAD_RESPONSE,
     TIMEOUT,
-    EMPTY_RESPONSE,
     NOT_DEFINED,
     BAD_REQUEST,
     UNAUTHORIZED,

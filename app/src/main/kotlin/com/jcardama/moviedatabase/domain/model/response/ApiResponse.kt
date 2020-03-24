@@ -5,9 +5,6 @@ import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
 class ApiResponse<T> {
-    @SerializedName("page")
-    @Expose
-    var page: Int? = null
     @SerializedName("results")
     @Expose
     var results: T? = null

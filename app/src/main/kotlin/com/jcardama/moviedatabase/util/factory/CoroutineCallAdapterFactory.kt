@@ -85,6 +85,7 @@ class CoroutineCallAdapterFactory private constructor() : CallAdapter.Factory() 
 
         override fun responseType() = responseType
 
+        @Suppress("DeferredIsResult")
         override fun adapt(call: Call<T>): Deferred<T> {
             val deferred = CompletableDeferred<T>()
 
@@ -118,6 +119,7 @@ class CoroutineCallAdapterFactory private constructor() : CallAdapter.Factory() 
 
         override fun responseType() = responseType
 
+        @Suppress("DeferredIsResult")
         override fun adapt(call: Call<T>): Deferred<Response<T>> {
             val deferred = CompletableDeferred<Response<T>>()
 

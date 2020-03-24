@@ -7,6 +7,7 @@ import dagger.Module
 
 @Module
 abstract class RepositoryBuilder {
+    @Suppress("unused")
     @Binds
     abstract fun bindsMovieRepository(movieRepository: MovieRepository): Repository
 }
