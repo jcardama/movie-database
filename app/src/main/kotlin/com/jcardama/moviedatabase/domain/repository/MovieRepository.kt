@@ -1,54 +1,26 @@
 package com.jcardama.moviedatabase.domain.repository
 
-import com.jcardama.moviedatabase.data.restful.MovieService
-import com.jcardama.moviedatabase.data.source.db.MovieDao
-import com.jcardama.moviedatabase.domain.model.Movie
-import javax.inject.Inject
+import com.jcardama.moviedatabase.data.model.MovieModel
+import com.jcardama.moviedatabase.domain.entity.MovieEntity
 
-class MovieRepository @Inject constructor(
-        private val api: MovieService,
-        private val dao: MovieDao
-) : Repository {
-    suspend fun save(movie: Movie?): Any {
-        return dao.save(movie)
-    }
+interface MovieRepository : Repository {
+    suspend fun getAll(shouldFetch: Boolean): List<MovieEntity>?
 
-    suspend fun getById(id: Int) = dao.getById(id)
+    suspend fun getById(id: Long): MovieEntity?
 
-    suspend fun searchByTitle(query: String): List<Movie>? = dao.searchByTitle(query)?.toMutableList().let { movies ->
-        movies?.addAll(api.searchAsync(query).await().results?.apply {
-            for(item in this) {
-                val currentItem = when(movies.contains(item)) {
-                    true -> {
-                        movies.find { it == item }
-                    }
-                    else -> item
-                }
-                currentItem?.isFromSearch = true
-                currentItem?.timestamp = System.currentTimeMillis()
-                save(currentItem)
-            }
-        } ?: mutableListOf())
-        movies?.distinctBy { it.id }
-    }
+    suspend fun save(movieModel: MovieModel?): Any
 
-    suspend fun getSearched(): List<Movie>? = dao.getSearched()
+    suspend fun searchByTitle(query: String): List<MovieEntity>?
 
-    suspend fun getAll(): List<Movie>? = dao.getAll().let {
-        when {
-            it.isNullOrEmpty() || it[0].expired() -> {
-                api.getAsync().await().results?.apply {
-                    for(item in this) {
-                        item.timestamp = System.currentTimeMillis()
-                        save(item)
-                    }
-                }
-            }
-            else -> it
-        }
-    }
+    suspend fun getSearched(): List<MovieEntity>?
 
-    suspend fun getFavorites(): List<Movie>? = dao.getFavorites()
+    suspend fun setAsSearched(id: Long): Any?
 
-    suspend fun getWatchList(): List<Movie>? = dao.getWatchList()
+    suspend fun getFavorites(): List<MovieEntity>?
+
+    suspend fun setFavorite(id: Long, isFavorite: Boolean): Any?
+
+    suspend fun getWatchList(): List<MovieEntity>?
+
+    suspend fun setWatchList(id: Long, isInWatchList: Boolean): Any?
 }

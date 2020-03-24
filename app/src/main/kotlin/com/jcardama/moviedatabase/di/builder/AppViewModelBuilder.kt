@@ -4,8 +4,8 @@ package com.jcardama.moviedatabase.di.builder
 
 import androidx.lifecycle.ViewModel
 import com.jcardama.moviedatabase.di.qualifier.ViewModelKey
-import com.jcardama.moviedatabase.ui.movies.MoviesViewModel
-import com.jcardama.moviedatabase.ui.search.SearchViewModel
+import com.jcardama.moviedatabase.presentation.movies.MoviesViewModel
+import com.jcardama.moviedatabase.presentation.search.SearchViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap

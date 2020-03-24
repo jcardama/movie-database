@@ -1,11 +1,11 @@
 package com.jcardama.moviedatabase.di.builder
 
 import androidx.lifecycle.ViewModelProvider
-import com.jcardama.moviedatabase.util.factory.ViewModelFactory
+import com.jcardama.moviedatabase.core.factory.ViewModelFactory
 import dagger.Binds
 import dagger.Module
 
-@Module(includes = [(RepositoryBuilder::class), (AppViewModelBuilder::class)])
+@Module(includes = [(DataSourceBuilder::class), (RepositoryBuilder::class), (AppViewModelBuilder::class)])
 abstract class ViewModelBuilder {
     @Suppress("unused")
     @Binds

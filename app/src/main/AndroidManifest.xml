@@ -19,7 +19,7 @@
       tools:targetApi="m">
 
     <activity
-        android:name="com.jcardama.moviedatabase.ui.main.MainActivity"
+        android:name="com.jcardama.moviedatabase.presentation.main.MainActivity"
         android:theme="@style/AppTheme.NoActionBar">
       <intent-filter>
         <action android:name="android.intent.action.MAIN"/>

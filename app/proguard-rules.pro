@@ -14,9 +14,6 @@
 -keepattributes *Annotation*
 -keepattributes SourceFile,LineNumberTable
 -keep public class * extends java.lang.Exception
--keepnames class com.fasterxml.jackson.** { *; }
--keepnames class javax.servlet.** { *; }
--keepnames class org.ietf.jgss.** { *; }
 -dontwarn org.jetbrains.annotations.**
 -dontwarn javax.lang.**
 -dontwarn javax.tools.**
@@ -47,14 +44,8 @@
 -allowaccessmodification
 
 # Kotlin
--keepclassmembernames class kotlinx.** {
-    volatile <fields>;
-}
 -keepnames class kotlinx.coroutines.internal.MainDispatcherFactory {}
 -keepnames class kotlinx.coroutines.CoroutineExceptionHandler {}
--keepclassmembernames class kotlinx.** {
-    volatile <fields>;
-}
 
 #Glide
 -keep public class * implements com.bumptech.glide.module.GlideModule
@@ -66,12 +57,9 @@
 
 #Gson
 -dontwarn sun.misc.**
--keep class com.google.gson.examples.android.model.** { *; }
--keep class com.jcardama.moviedatabase.domain.model.** { *; }
 -keep class * implements com.google.gson.TypeAdapterFactory
 -keep class * implements com.google.gson.JsonSerializer
 -keep class * implements com.google.gson.JsonDeserializer
 
 #Stetho
--keep class com.facebook.stetho.** { *; }
 -dontwarn com.facebook.stetho.**
