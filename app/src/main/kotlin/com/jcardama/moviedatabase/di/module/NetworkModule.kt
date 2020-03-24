@@ -3,8 +3,8 @@ package com.jcardama.moviedatabase.di.module
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.jcardama.moviedatabase.core.Config
-import com.jcardama.moviedatabase.data.restful.MovieService
-import com.jcardama.moviedatabase.util.factory.CoroutineCallAdapterFactory
+import com.jcardama.moviedatabase.data.source.remote.restful.MovieService
+import com.jcardama.moviedatabase.core.factory.CoroutineCallAdapterFactory
 import dagger.Module
 import dagger.Provides
 import okhttp3.Interceptor
@@ -21,9 +21,8 @@ class NetworkModule {
     @Singleton
     @Provides
     fun provideInterceptors(): ArrayList<Interceptor> = arrayListOf(Interceptor { chain ->
-        val original = chain.request()
-        return@Interceptor chain.proceed(original.newBuilder()
-                .url(original.url.newBuilder()
+        return@Interceptor chain.proceed(chain.request().newBuilder()
+                .url(chain.request().url.newBuilder()
                         .addQueryParameter("api_key", Config.API_KEY)
                         .build()).build())
     })
@@ -34,47 +33,37 @@ class NetworkModule {
             gsonConverterFactory: GsonConverterFactory,
             okHttpClient: OkHttpClient,
             interceptors: ArrayList<Interceptor>
-    ): Retrofit {
-        val clientBuilder = OkHttpClient.Builder()
-        interceptors.forEach { interceptor ->
-            clientBuilder.addInterceptor(interceptor)
-        }
-        return Retrofit.Builder().client(clientBuilder.build())
-                .baseUrl(Config.HOST)
-                .addConverterFactory(gsonConverterFactory)
-                .addCallAdapterFactory(CoroutineCallAdapterFactory())
-                .client(okHttpClient)
-                .build()
-    }
+    ): Retrofit = Retrofit.Builder().client(OkHttpClient.Builder().apply {
+                interceptors.forEach { interceptor ->
+                    addInterceptor(interceptor)
+                }
+            }.build())
+            .baseUrl(Config.HOST)
+            .addConverterFactory(gsonConverterFactory)
+            .addCallAdapterFactory(CoroutineCallAdapterFactory())
+            .client(okHttpClient)
+            .build()
 
     @Provides
     @Singleton
-    fun providesOkHttpClient(): OkHttpClient {
-        val client = OkHttpClient.Builder()
-                .connectTimeout(120, TimeUnit.SECONDS)
-                .writeTimeout(120, TimeUnit.SECONDS)
-                .readTimeout(120, TimeUnit.SECONDS)
-        val interceptor = HttpLoggingInterceptor()
-        interceptor.level = HttpLoggingInterceptor.Level.BODY
-        client.addNetworkInterceptor(interceptor)
-        return client.build()
-    }
+    fun providesOkHttpClient(): OkHttpClient = OkHttpClient.Builder()
+            .connectTimeout(120, TimeUnit.SECONDS)
+            .writeTimeout(120, TimeUnit.SECONDS)
+            .readTimeout(120, TimeUnit.SECONDS).apply {
+                addNetworkInterceptor(HttpLoggingInterceptor().apply {
+                    level = HttpLoggingInterceptor.Level.BODY
+                })
+            }.build()
 
     @Provides
     @Singleton
-    fun providesGson(): Gson {
-        return GsonBuilder().excludeFieldsWithoutExposeAnnotation().create()
-    }
+    fun providesGson(): Gson = GsonBuilder().excludeFieldsWithoutExposeAnnotation().create()
 
     @Provides
     @Singleton
-    fun providesGsonConverterFactory(): GsonConverterFactory {
-        return GsonConverterFactory.create()
-    }
+    fun providesGsonConverterFactory(): GsonConverterFactory = GsonConverterFactory.create()
 
     @Singleton
     @Provides
-    fun providesMovieService(retrofit: Retrofit): MovieService {
-        return retrofit.create(MovieService::class.java)
-    }
+    fun providesMovieService(retrofit: Retrofit): MovieService = retrofit.create(MovieService::class.java)
 }

@@ -2,14 +2,14 @@
 
 package com.jcardama.moviedatabase.di.builder
 
-import com.jcardama.moviedatabase.ui.base.BaseFragment
-import com.jcardama.moviedatabase.ui.movies.MoviesFragment
-import com.jcardama.moviedatabase.ui.movies.details.DetailsFragment
-import com.jcardama.moviedatabase.ui.movies.favorites.FavoritesFragment
-import com.jcardama.moviedatabase.ui.movies.list.MoviesListFragment
-import com.jcardama.moviedatabase.ui.search.SearchFragment
-import com.jcardama.moviedatabase.ui.splash.SplashFragment
-import com.jcardama.moviedatabase.ui.watchlist.WatchListFragment
+import com.jcardama.moviedatabase.presentation.base.BaseFragment
+import com.jcardama.moviedatabase.presentation.movies.MoviesFragment
+import com.jcardama.moviedatabase.presentation.movies.details.DetailsFragment
+import com.jcardama.moviedatabase.presentation.movies.favorites.FavoritesFragment
+import com.jcardama.moviedatabase.presentation.movies.list.MoviesListFragment
+import com.jcardama.moviedatabase.presentation.search.SearchFragment
+import com.jcardama.moviedatabase.presentation.splash.SplashFragment
+import com.jcardama.moviedatabase.presentation.movies.watchlist.WatchListFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 

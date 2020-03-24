@@ -1,6 +1,6 @@
 package com.jcardama.moviedatabase.di.builder
 
-import com.jcardama.moviedatabase.ui.main.MainActivity
+import com.jcardama.moviedatabase.presentation.main.MainActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
